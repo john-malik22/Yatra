@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yatra Travels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --bg-top: #f8fbff;
+            --bg-mid: #eef5ff;
+            --bg-bottom: #eef2f7;
+            --panel: rgba(255, 255, 255, 0.82);
+            --border: rgba(148, 163, 184, 0.24);
+            --text: #0f172a;
+            --muted: #475569;
+            --accent: #0ea5e9;
+            --accent-dark: #0284c7;
+            --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.14);
+            --shadow-md: 0 18px 38px rgba(15, 23, 42, 0.1);
+            --radius-lg: 30px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 28%),
+                radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 22%),
+                linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 48%, var(--bg-bottom) 100%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-shell {
+            width: min(1200px, calc(100% - 32px));
+            margin: 24px auto 48px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 18px 24px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+            backdrop-filter: blur(14px);
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: #0ea5e9;
+        }
+
+        .brand span {
+            color: #f8fafc;
+        }
+
+        .topbar-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .topbar-links a {
+            padding: 10px 16px;
+            border-radius: 999px;
+            color: #e2e8f0;
+            font-weight: 600;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .topbar-links a:hover,
+        .topbar-links a.active {
+            background: rgba(14, 165, 233, 0.16);
+            color: #ffffff;
+        }
+
+        .booking-hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .hero-copy,
+        .hero-side {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-copy {
+            min-height: 340px;
+            padding: 42px;
+            color: #ffffff;
+            background:
+                linear-gradient(120deg, rgba(8, 47, 73, 0.82), rgba(14, 116, 144, 0.44)),
+                url('image3.jpg') center/cover no-repeat;
+        }
+
+        .hero-copy::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.5));
+            pointer-events: none;
+        }
+
+        .hero-copy>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-copy h1 {
+            margin-top: 18px;
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.04;
+            letter-spacing: -0.04em;
+            max-width: 10ch;
+        }
+
+        .hero-copy p {
+            max-width: 540px;
+            margin-top: 16px;
+            line-height: 1.75;
+            color: #e0f2fe;
+        }
+
+        .hero-points {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .hero-points div {
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .hero-points strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .hero-points span {
+            color: #bae6fd;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .hero-side {
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.84));
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-side h2 {
+            font-size: 28px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .hero-side p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .hero-note-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .hero-note {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: #f8fbff;
+            border: 1px solid rgba(14, 165, 233, 0.12);
+        }
+
+        .hero-note strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .hero-note span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .booking-stage {
+            margin-top: 24px;
+        }
+
+        .booking-container {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.84));
+            border: 1px solid rgba(219, 231, 243, 0.96);
+            border-radius: 32px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            backdrop-filter: blur(14px);
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
+        }
+
+        .tabs div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 10px 16px;
+            border-radius: 18px;
+            color: #cbd5e1;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            transition: transform 0.18s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tabs div.active,
+        .tabs div:hover {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-1px);
+        }
+
+        .form-section {
+            display: none;
+            padding: 32px;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .section-title {
+            margin-bottom: 22px;
+        }
+
+        .section-title h3 {
+            font-size: 30px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 720px;
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .info-card {
+            padding: 24px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, #ffffff, #f8fbff);
+            border: 1px solid rgba(219, 231, 243, 0.96);
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-card h4,
+        .tour-form h3 {
+            margin-bottom: 16px;
+            font-size: 18px;
+            color: var(--text);
+        }
+
+        .tour-form h3 {
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .tour-form h3:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        input,
+        select {
+            width: 100%;
+            min-height: 52px;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 16px;
+            background: #ffffff;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.14);
+        }
+
+        .mini-points {
+            display: grid;
+            gap: 14px;
+        }
+
+        .mini-points div {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: #eff6ff;
+            border: 1px solid rgba(56, 189, 248, 0.18);
+        }
+
+        .mini-points strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .mini-points span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .service-note {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .book-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 56px;
+            margin-top: 8px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 18px 30px rgba(2, 132, 199, 0.2);
+            transition: transform 0.18s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03);
+        }
+
+        .popup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.56);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+        }
+
+        .popup-content {
+            width: min(560px, 100%);
+            padding: 28px;
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.95));
+            border: 1px solid rgba(219, 231, 243, 0.96);
+            box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+            text-align: center;
+        }
+
+        .popup-content h2 {
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 28px;
+            letter-spacing: -0.03em;
+        }
+
+        .popup-subtitle {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        #popupDetails {
+            margin-top: 14px;
+            padding: 18px;
+            border-radius: 20px;
+            text-align: left;
+            line-height: 1.75;
+            color: #334155;
+            background: #f8fbff;
+            border: 1px solid rgba(219, 231, 243, 0.96);
+        }
+
+        #popupDetails strong {
+            color: #0f172a;
+        }
+
+        .popup-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .popup-content button {
+            min-width: 180px;
+            min-height: 48px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 980px) {
+
+            .booking-hero,
+            .panel-grid,
+            .hero-points {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .page-shell {
+                width: calc(100% - 24px);
+                margin-top: 12px;
+            }
+
+            .topbar {
+                border-radius: 28px;
+                padding: 18px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-copy,
+            .hero-side,
+            .booking-container {
+                border-radius: 24px;
+            }
+
+            .hero-copy {
+                padding: 28px;
+                min-height: auto;
+            }
+
+            .hero-side,
+            .form-section {
+                padding: 22px;
+            }
+
+            .section-title h3,
+            .hero-side h2,
+            .popup-content h2 {
+                font-size: 24px;
+            }
+
+            .tabs {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group {
+                min-width: 100%;
+            }
+
+            .popup-content {
+                padding: 22px;
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-shell">
+        <header class="topbar">
+            <a href="index.html" class="brand">Yatr<span>A</span></a>
+            <nav class="topbar-links">
+                <a href="index.html">Home</a>
+                <a href="form.html" class="active">Bookings</a>
+            </nav>
+        </header>
+
+        <section class="booking-stage">
+            <div class="booking-container">
+                <div class="tabs">
+                    <div class="active" data-target="hotels">Hotels</div>
+                    <div data-target="buses">Buses</div>
+                    <div data-target="cabs">Cabs</div>
+                    <div data-target="tours">Tours</div>
+                </div>
+
+                <div class="form-section active" id="hotels">
+                    <div class="section-title">
+                        <h3>Reserve your hotel stay</h3>
+                        <p>Choose your destination, dates, and room preferences for a quick stay booking.</p>
+                    </div>
+                    <div class="panel-grid">
+                        <div class="info-card">
+                            <h4>Guest Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Full Name</label><input id="hotel-name"
+                                        placeholder="Enter your full name"></div>
+                                <div class="form-group"><label>Phone</label><input id="hotel-phone"
+                                        placeholder="Enter your phone number"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email</label><input type="email" id="hotel-email"
+                                        placeholder="Enter your email"></div>
+                            </div>
+                            <h4>Stay Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Destination</label><input id="hotel-city"
+                                        placeholder="City or hotel location"></div>
+                                <div class="form-group"><label>Check-in</label><input type="date" id="checkin"></div>
+                                <div class="form-group"><label>Check-out</label><input type="date" id="checkout"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>People</label><input type="number" min="1"
+                                        id="hotel-people"></div>
+                                <div class="form-group"><label>Rooms</label>
+                                    <select id="rooms">
+                                        <option>1 Room</option>
+                                        <option>2 Rooms</option>
+                                        <option>3 Rooms</option>
+                                        <option>4+ Rooms</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="service-note">Hotel stays include stay details, guest details, and a downloadable
+                                booking receipt.</p>
+                            <button class="book-btn" onclick="bookHotel()">Book Hotel</button>
+                        </div>
+                        <div class="info-card">
+                            <h4>Why this flow works</h4>
+                            <div class="mini-points">
+                                <div><strong>Simple destination search</strong><span>Enter your city and confirm the
+                                        stay in just a few fields.</span></div>
+                                <div><strong>Guest-first setup</strong><span>People count and room details stay visible
+                                        before confirmation.</span></div>
+                                <div><strong>Instant proof</strong><span>Your confirmation receipt is ready right after
+                                        the booking is saved.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section" id="buses">
+                    <div class="section-title">
+                        <h3>Book a bus trip</h3>
+                        <p>Lock your route, choose your date, and confirm passenger details in one clean step.</p>
+                    </div>
+                    <div class="panel-grid">
+                        <div class="info-card">
+                            <h4>Passenger Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Full Name</label><input id="bus-name"
+                                        placeholder="Enter your full name"></div>
+                                <div class="form-group"><label>Phone</label><input id="bus-phone"
+                                        placeholder="Enter your phone number"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email</label><input type="email" id="bus-email"
+                                        placeholder="Enter your email"></div>
+                            </div>
+                            <h4>Trip Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>From</label><input id="bus-from"
+                                        placeholder="Pickup city"></div>
+                                <div class="form-group"><label>To</label><input id="bus-to"
+                                        placeholder="Destination city"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Date</label><input type="date" id="bus-date"></div>
+                                <div class="form-group"><label>People</label><input type="number" min="1"
+                                        id="bus-people"></div>
+                            </div>
+                            <p class="service-note">Bus booking creates an instant confirmation receipt with route and
+                                traveler details.</p>
+                            <button class="book-btn" onclick="bookBus()">Book Bus</button>
+                        </div>
+                        <div class="info-card">
+                            <h4>Helpful notes</h4>
+                            <div class="mini-points">
+                                <div><strong>Fast route input</strong><span>Start and destination fields make intercity
+                                        planning quick.</span></div>
+                                <div><strong>Smart booking record</strong><span>Each reservation is saved into your
+                                        recent booking history automatically.</span></div>
+                                <div><strong>Receipt included</strong><span>Get a ready-to-download summary with trip
+                                        and passenger details.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section" id="cabs">
+                    <div class="section-title">
+                        <h3>Arrange a private cab</h3>
+                        <p>Set pickup, drop, date, and cab type for a clean point-to-point ride booking experience.</p>
+                    </div>
+                    <div class="panel-grid">
+                        <div class="info-card">
+                            <h4>Rider Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Full Name</label><input id="cab-name"
+                                        placeholder="Enter your full name"></div>
+                                <div class="form-group"><label>Phone</label><input id="cab-phone"
+                                        placeholder="Enter your phone number"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Email</label><input type="email" id="cab-email"
+                                        placeholder="Enter your email"></div>
+                            </div>
+                            <h4>Ride Details</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Pickup</label><input id="cab-pickup"
+                                        placeholder="Pickup location"></div>
+                                <div class="form-group"><label>Drop</label><input id="cab-drop"
+                                        placeholder="Drop location"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Date</label><input type="date" id="cab-date"></div>
+                                <div class="form-group"><label>Cab Type</label>
+                                    <select id="cab-type">
+                                        <option>Sedan</option>
+                                        <option>SUV</option>
+                                        <option>Luxury</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>People</label><input type="number" min="1"
+                                        id="cab-people"></div>
+                            </div>
+                            <p class="service-note">Cab receipts include rider, driver, car number, and trip cost
+                                details.</p>
+                            <button class="book-btn" onclick="bookCab()">Book Cab</button>
+                        </div>
+                        <div class="info-card">
+                            <h4>Cab booking benefits</h4>
+                            <div class="mini-points">
+                                <div><strong>Clear trip structure</strong><span>Pickup and drop details stay
+                                        straightforward and easy to review.</span></div>
+                                <div><strong>Service visibility</strong><span>Choose the ride category that best fits
+                                        your travel group.</span></div>
+                                <div><strong>Confirmed driver info</strong><span>Your receipt includes cab and driver
+                                        details right after confirmation.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section" id="tours">
+                    <div class="section-title">
+                        <h3>Plan a complete tour package</h3>
+                        <p>Combine personal details, transport, stay, room type, and meals in one guided booking flow.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <form id="tourBookingForm" class="tour-form">
+                            <h3>Personal Info</h3>
+                            <div class="form-row">
+                                <div class="form-group"><label>Name</label><input id="tour-name" required></div>
+                                <div class="form-group"><label>Email</label><input type="email" id="tour-email"
+                                        required></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Phone</label><input id="tour-phone" required></div>
+                            </div>
+
+                            <h3>Travel</h3>
+                            <div class="form-row">
+                                <div class="form-group"><label>Pickup</label><input id="tour-pickup" required></div>
+                                <div class="form-group"><label>Destination</label><input id="tour-destination" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Date</label><input type="date" id="tour-date" required>
+                                </div>
+                                <div class="form-group"><label>Transport</label>
+                                    <select id="tour-transport" required>
+                                        <option>Bus</option>
+                                        <option>Car Rental</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>People</label><input type="number" min="1"
+                                        id="tour-people" required></div>
+                            </div>
+
+                            <h3>Accommodation</h3>
+                            <div class="form-row">
+                                <div class="form-group"><label>Hotel</label>
+                                    <select id="tour-hotel">
+                                        <option>3-Star</option>
+                                        <option>4-Star</option>
+                                        <option>5-Star</option>
+                                        <option>Budget</option>
+                                        <option>Guesthouse</option>
+                                    </select>
+                                </div>
+                                <div class="form-group"><label>Room</label>
+                                    <select id="tour-room">
+                                        <option>Single</option>
+                                        <option>Double</option>
+                                        <option>Family</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Meal</label>
+                                    <select id="tour-meal">
+                                        <option>Vegetarian</option>
+                                        <option>Non-Vegetarian</option>
+                                        <option>Vegan</option>
+                                        <option>Special Diet</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="book-btn">Confirm Tour Booking</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup-content" id="popupContent">
+            <h2>Booking Confirmed</h2>
+            <p class="popup-subtitle">Your booking is ready and the receipt can be downloaded anytime below.</p>
+            <div id="popupDetails"></div>
+            <div class="popup-actions">
+                <button type="button" id="downloadReceiptBtn">Download PDF Receipt</button>
+                <button type="button" onclick="document.getElementById('popup').style.display='none'">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll(".tabs div");
+            const sections = document.querySelectorAll(".form-section");
+            const popup = document.getElementById("popup");
+            const popupDetails = document.getElementById("popupDetails");
+            const downloadReceiptBtn = document.getElementById("downloadReceiptBtn");
+            let latestReceipt = null;
+
+            const BOOKING_HISTORY_KEY = "yatraBookingHistory";
+            const SESSION_KEY = "yatraCurrentUser";
+
+            function showSection(targetId) {
+                tabs.forEach((tab) => {
+                    tab.classList.toggle("active", tab.dataset.target === targetId);
+                });
+
+                sections.forEach((section) => {
+                    section.classList.toggle("active", section.id === targetId);
+                });
+            }
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                    showSection(tab.dataset.target);
+                });
+            });
+
+            const params = new URLSearchParams(window.location.search);
+            const destination = params.get("destination");
+
+            if (destination) {
+                showSection("tours");
+                const destinationField = document.getElementById("tour-destination");
+                const pickupField = document.getElementById("tour-pickup");
+                if (destinationField) {
+                    destinationField.value = destination;
+                }
+                if (pickupField) {
+                    pickupField.value = "Bulandshahr";
+                }
+            }
+
+            function value(id) {
+                return document.getElementById(id)?.value.trim() || "";
+            }
+
+            function requireFields(fields) {
+                for (const field of fields) {
+                    const fieldValue = value(field.id);
+                    if (!fieldValue) {
+                        alert(field.message);
+                        document.getElementById(field.id)?.focus();
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function formatCurrency(amount) {
+                return `Rs ${amount.toLocaleString("en-IN")}`;
+            }
+
+            function getLocalList(key) {
+                return JSON.parse(localStorage.getItem(key) || "[]");
+            }
+
+            function saveLocalList(key, list) {
+                localStorage.setItem(key, JSON.stringify(list));
+            }
+
+            function getCurrentUser() {
+                return JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
+            }
+
+            function getBookingTitle(entry) {
+                if (entry.type === "Hotel") {
+                    return entry.city || "Hotel Booking";
+                }
+
+                if (entry.type === "Bus") {
+                    return `${entry.from || "Departure"} to ${entry.to || "Destination"}`;
+                }
+
+                if (entry.type === "Cab") {
+                    return `${entry.pickup || "Pickup"} to ${entry.drop || "Drop"}`;
+                }
+
+                return entry.destination || "Tour Booking";
+            }
+
+            function getBookingSummary(entry) {
+                const traveler = entry.customerName || entry.name || "Traveler";
+                return `${traveler} booked a ${entry.type || "trip"} with Yatra Travels.`;
+            }
+
+            function getBookingMeta(entry) {
+                return [
+                    entry.date || entry.checkIn,
+                    entry.people ? `${entry.people} people` : "",
+                    entry.phone
+                ].filter(Boolean).join(" | ");
+            }
+
+            function saveLocalBooking(entry, key = BOOKING_HISTORY_KEY) {
+                const currentUser = getCurrentUser();
+                const booking = {
+                    ...entry,
+                    id: `local-${Date.now()}`,
+                    userEmail: entry.email || currentUser?.email || "",
+                    title: getBookingTitle(entry),
+                    summary: getBookingSummary(entry),
+                    meta: getBookingMeta(entry),
+                    createdAt: new Date().toLocaleString()
+                };
+                const bookings = getLocalList(key);
+                bookings.push(booking);
+                saveLocalList(key, bookings);
+                return booking;
+            }
+
+            function saveBooking(entry) {
+                saveLocalBooking(entry);
+                return true;
+            }
+
+            function formatReceiptHtml(title, lines, amount) {
+                const rows = lines.map((line) => `<div>${line}</div>`).join("");
+                return `
+                    <div>
+                        <strong>${title}</strong><br><br>
+                        ${rows}
+                        <br>
+                        <strong>Total Amount: ${amount}</strong>
+                    </div>
+                `;
+            }
+
+            function showReceipt(receipt) {
+                latestReceipt = receipt;
+                popupDetails.innerHTML = receipt.html;
+                popup.style.display = "flex";
+            }
+
+            function htmlToPlainLines(html) {
+                const temp = document.createElement("div");
+                temp.innerHTML = html.replace(/<br\s*\/?>/gi, "\n").replace(/<\/div>/gi, "\n");
+                return (temp.textContent || "")
+                    .split("\n")
+                    .map((line) => line.trim())
+                    .filter(Boolean);
+            }
+
+            function escapePdfText(text) {
+                return text
+                    .replace(/\\/g, "\\\\")
+                    .replace(/\(/g, "\\(")
+                    .replace(/\)/g, "\\)");
+            }
+
+            function downloadReceipt() {
+                if (!latestReceipt) {
+                    return;
+                }
+
+                const lines = [
+                    "Yatra Travels Receipt",
+                    latestReceipt.title,
+                    `Generated: ${new Date().toLocaleString()}`,
+                    "",
+                    ...htmlToPlainLines(latestReceipt.html)
+                ];
+
+                let y = 800;
+                const lineHeight = 20;
+                const streamParts = ["BT", "/F1 18 Tf", `50 ${y} Td`, `(${escapePdfText(lines[0])}) Tj`];
+
+                for (let i = 1; i < lines.length; i++) {
+                    y -= lineHeight;
+                    const fontSize = i === 1 ? 14 : 12;
+                    streamParts.push(`/F1 ${fontSize} Tf`);
+                    streamParts.push(`1 0 0 1 50 ${y} Tm`);
+                    streamParts.push(`(${escapePdfText(lines[i])}) Tj`);
+                }
+
+                streamParts.push("ET");
+                const stream = streamParts.join("\n");
+
+                const objects = [
+                    "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj",
+                    "2 0 obj << /Type /Pages /Count 1 /Kids [3 0 R] >> endobj",
+                    "3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >> endobj",
+                    "4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj",
+                    `5 0 obj << /Length ${stream.length} >> stream
+${stream}
+endstream endobj`
+                ];
+
+                let pdf = "%PDF-1.4\n";
+                const offsets = [0];
+
+                objects.forEach((obj) => {
+                    offsets.push(pdf.length);
+                    pdf += `${obj}\n`;
+                });
+
+                const xrefStart = pdf.length;
+                pdf += `xref
+0 ${objects.length + 1}
+0000000000 65535 f 
+`;
+
+                for (let i = 1; i < offsets.length; i++) {
+                    pdf += `${String(offsets[i]).padStart(10, "0")} 00000 n 
+`;
+                }
+
+                pdf += `trailer << /Size ${objects.length + 1} /Root 1 0 R >>
+startxref
+${xrefStart}
+%%EOF`;
+
+                const blob = new Blob([pdf], { type: "application/pdf" });
+                const link = document.createElement("a");
+                const safeName = latestReceipt.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                link.href = URL.createObjectURL(blob);
+                link.download = `${safeName || "booking"}-receipt.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(link.href);
+            }
+
+            downloadReceiptBtn?.addEventListener("click", downloadReceipt);
+
+            window.bookHotel = async function () {
+                if (!requireFields([
+                    { id: "hotel-name", message: "Please enter the guest name." },
+                    { id: "hotel-phone", message: "Please enter the phone number." },
+                    { id: "hotel-email", message: "Please enter the email address." },
+                    { id: "hotel-city", message: "Please enter the hotel destination." },
+                    { id: "checkin", message: "Please choose the check-in date." },
+                    { id: "checkout", message: "Please choose the check-out date." },
+                    { id: "hotel-people", message: "Please enter the number of guests." }
+                ])) {
+                    return;
+                }
+
+                const people = Number(value("hotel-people")) || 1;
+                const amount = 1500 * people;
+                saveBooking({
+                    type: "Hotel",
+                    customerName: value("hotel-name"),
+                    phone: value("hotel-phone"),
+                    email: value("hotel-email"),
+                    city: value("hotel-city"),
+                    checkIn: value("checkin"),
+                    checkOut: value("checkout"),
+                    rooms: value("rooms"),
+                    people,
+                    amount
+                });
+
+                showReceipt({
+                    title: "Hotel Booking Receipt",
+                    html: formatReceiptHtml("Hotel Booking", [
+                        `Guest Name: ${value("hotel-name")}`,
+                        `Phone: ${value("hotel-phone")}`,
+                        `Email: ${value("hotel-email")}`,
+                        `City: ${value("hotel-city")}`,
+                        `Check-in: ${value("checkin")}`,
+                        `Check-out: ${value("checkout")}`,
+                        `People: ${people}`,
+                        `Rooms: ${value("rooms") || "-"}`,
+                        `Saved: Local history`
+                    ], formatCurrency(amount))
+                });
+            };
+
+            window.bookBus = async function () {
+                if (!requireFields([
+                    { id: "bus-name", message: "Please enter the passenger name." },
+                    { id: "bus-phone", message: "Please enter the phone number." },
+                    { id: "bus-email", message: "Please enter the email address." },
+                    { id: "bus-from", message: "Please enter the departure city." },
+                    { id: "bus-to", message: "Please enter the destination city." },
+                    { id: "bus-date", message: "Please choose the bus date." },
+                    { id: "bus-people", message: "Please enter the number of travelers." }
+                ])) {
+                    return;
+                }
+
+                const people = Number(value("bus-people")) || 1;
+                const amount = 500 * people;
+                saveBooking({
+                    type: "Bus",
+                    customerName: value("bus-name"),
+                    phone: value("bus-phone"),
+                    email: value("bus-email"),
+                    from: value("bus-from"),
+                    to: value("bus-to"),
+                    date: value("bus-date"),
+                    people,
+                    amount
+                });
+
+                showReceipt({
+                    title: "Bus Booking Receipt",
+                    html: formatReceiptHtml("Bus Booking", [
+                        `Passenger Name: ${value("bus-name")}`,
+                        `Phone: ${value("bus-phone")}`,
+                        `Email: ${value("bus-email")}`,
+                        `From: ${value("bus-from")}`,
+                        `To: ${value("bus-to")}`,
+                        `Date: ${value("bus-date")}`,
+                        `People: ${people}`,
+                        `Saved: Local history`
+                    ], formatCurrency(amount))
+                });
+            };
+
+            window.bookCab = async function () {
+                if (!requireFields([
+                    { id: "cab-name", message: "Please enter the rider name." },
+                    { id: "cab-phone", message: "Please enter the phone number." },
+                    { id: "cab-email", message: "Please enter the email address." },
+                    { id: "cab-pickup", message: "Please enter the pickup location." },
+                    { id: "cab-drop", message: "Please enter the drop location." },
+                    { id: "cab-date", message: "Please choose the cab date." },
+                    { id: "cab-people", message: "Please enter the number of passengers." }
+                ])) {
+                    return;
+                }
+
+                const people = Number(value("cab-people")) || 1;
+                const amount = 800 + Math.max(0, people - 1) * 150;
+                saveBooking({
+                    type: "Cab",
+                    customerName: value("cab-name"),
+                    phone: value("cab-phone"),
+                    email: value("cab-email"),
+                    pickup: value("cab-pickup"),
+                    drop: value("cab-drop"),
+                    date: value("cab-date"),
+                    cabType: value("cab-type"),
+                    people,
+                    amount
+                });
+
+                showReceipt({
+                    title: "Cab Booking Receipt",
+                    html: formatReceiptHtml("Cab Booking", [
+                        `Rider Name: ${value("cab-name")}`,
+                        `Phone: ${value("cab-phone")}`,
+                        `Email: ${value("cab-email")}`,
+                        `Pickup: ${value("cab-pickup")}`,
+                        `Drop: ${value("cab-drop")}`,
+                        `Date: ${value("cab-date")}`,
+                        `Cab Type: ${value("cab-type")}`,
+                        `People: ${people}`,
+                        `Saved: Local history`
+                    ], formatCurrency(amount))
+                });
+            };
+
+            document.getElementById("tourBookingForm")?.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                if (!requireFields([
+                    { id: "tour-name", message: "Please enter the traveler name." },
+                    { id: "tour-email", message: "Please enter the email address." },
+                    { id: "tour-phone", message: "Please enter the phone number." },
+                    { id: "tour-pickup", message: "Please enter the pickup location." },
+                    { id: "tour-destination", message: "Please enter the tour destination." },
+                    { id: "tour-date", message: "Please choose the tour date." },
+                    { id: "tour-people", message: "Please enter the number of travelers." }
+                ])) {
+                    return;
+                }
+
+                const people = Number(value("tour-people")) || 1;
+                const amount = 2500 * people;
+                saveBooking({
+                    type: "Tour",
+                    name: value("tour-name"),
+                    email: value("tour-email"),
+                    phone: value("tour-phone"),
+                    pickup: value("tour-pickup"),
+                    destination: value("tour-destination"),
+                    date: value("tour-date"),
+                    transport: value("tour-transport"),
+                    people,
+                    hotel: value("tour-hotel"),
+                    room: value("tour-room"),
+                    meal: value("tour-meal"),
+                    amount
+                });
+
+                showReceipt({
+                    title: "Tour Booking Receipt",
+                    html: formatReceiptHtml("Tour Booking", [
+                        `Name: ${value("tour-name")}`,
+                        `Email: ${value("tour-email")}`,
+                        `Phone: ${value("tour-phone")}`,
+                        `Pickup: ${value("tour-pickup")}`,
+                        `Destination: ${value("tour-destination")}`,
+                        `Date: ${value("tour-date")}`,
+                        `Transport: ${value("tour-transport")}`,
+                        `People: ${people}`,
+                        `Hotel: ${value("tour-hotel")}`,
+                        `Room: ${value("tour-room")}`,
+                        `Meal: ${value("tour-meal")}`,
+                        `Saved: Local history`
+                    ], formatCurrency(amount))
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
